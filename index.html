@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freiheit — Ideenblatt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0b0d12;
+      --surface:      #111318;
+      --surface2:     #181b23;
+      --surface3:     #1f2330;
+      --border:       rgba(255,255,255,0.06);
+      --border2:      rgba(255,255,255,0.11);
+      --gold:         #c9a84c;
+      --gold-light:   #e4c97a;
+      --gold-dim:     rgba(201,168,76,0.12);
+      --text:         #eceae0;
+      --text2:        #878480;
+      --text3:        #454240;
+      --green:        #3d7a5e;
+      --green-light:  #5aaa7e;
+      --green-dim:    rgba(61,122,94,0.16);
+      --red:          #a83c3c;
+      --red-dim:      rgba(168,60,60,0.16);
+      --radius:       14px;
+      --radius-sm:    9px;
+      --radius-xs:    6px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 5rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 2.5rem 2.5rem 0;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 100% at 5% 50%, rgba(201,168,76,0.055) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 70% at 95% 10%, rgba(61,122,94,0.045) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+
+    .logo-img {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      object-fit: cover;
+      box-shadow: 0 0 22px rgba(201,168,76,0.18);
+      flex-shrink: 0;
+    }
+
+    .brand-text { line-height: 1; }
+
+    .brand-eyebrow {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text3);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ── META BAR ── */
+    .meta-bar {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.2rem 0 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      color: var(--text3);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 2px;
+    }
+
+    .meta-input {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-xs);
+      padding: 6px 11px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .meta-input:focus { border-color: rgba(201,168,76,0.5); }
+    .meta-input::placeholder { color: var(--text3); }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      max-width: 1120px;
+      margin: 2rem auto 1.5rem;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .toolbar-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .toolbar-right { display: flex; gap: 8px; }
+
+    .btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      border: 1px solid var(--border2);
+      background: var(--surface2);
+      color: var(--text2);
+      transition: all 0.18s;
+      letter-spacing: 0.02em;
+    }
+    .btn:hover { background: var(--surface3); color: var(--text); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0b0d12;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      color: #0b0d12;
+      box-shadow: 0 0 18px rgba(201,168,76,0.22);
+    }
+
+    /* ── GRID ── */
+    .grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 1.4rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      animation: fadeUp 0.28s ease;
+      transition: border-color 0.2s;
+    }
+    .card:focus-within { border-color: rgba(201,168,76,0.22); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-accent {
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 80%);
+      opacity: 0.6;
+    }
+
+    /* Card header */
+    .card-head {
+      padding: 1rem 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-head-left { display: flex; align-items: center; gap: 8px; }
+
+    .card-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,168,76,0.18);
+    }
+
+    .card-person-name {
+      font-size: 11.5px;
+      color: var(--text2);
+      font-weight: 400;
+    }
+
+    .btn-del {
+      background: none; border: none;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: var(--text3);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-del:hover { background: var(--red-dim); color: #d06060; }
+
+    /* Card body */
+    .card-body { padding: 1.2rem 1.3rem; }
+
+    /* Section title */
+    .sec {
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .sec:first-child { margin-top: 0; }
+    .sec::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* Fields */
+    .field { margin-bottom: 0.8rem; }
+    .field:last-child { margin-bottom: 0; }
+
+    .flabel {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+
+    .finput, .ftextarea {
+      width: 100%;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      padding: 8px 10px;
+      outline: none;
+      line-height: 1.5;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .finput:focus, .ftextarea:focus {
+      border-color: rgba(201,168,76,0.35);
+      background: var(--surface3);
+    }
+    .finput::placeholder, .ftextarea::placeholder { color: var(--text3); }
+    .ftextarea { resize: vertical; min-height: 68px; }
+    .ftextarea.sm { min-height: 52px; }
+
+    .finput.title-f {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Two col */
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* Euro prefix */
+    .eur-wrap { position: relative; }
+    .eur-sym {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      font-size: 12px; color: var(--gold); font-weight: 600; pointer-events: none;
+    }
+    .eur-wrap .finput { padding-left: 23px; }
+
+    /* Yes / No toggle */
+    .yn { display: flex; gap: 6px; margin-top: 4px; }
+    .yn-btn {
+      font-size: 11.5px; font-weight: 500;
+      padding: 5px 14px; border-radius: 999px;
+      cursor: pointer; user-select: none;
+      border: 1px solid var(--border2);
+      color: var(--text3); background: var(--surface2);
+      transition: all 0.15s;
+    }
+    .yn-btn:hover { color: var(--text); }
+    .yn-btn.ja  { background: var(--green-dim); border-color: var(--green); color: var(--green-light); }
+    .yn-btn.nein { background: var(--red-dim);  border-color: var(--red);   color: #d06060; }
+
+    /* Chip tags */
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+    .chip {
+      font-size: 11px; font-weight: 500;
+      padding: 4px 11px; border-radius: 999px;
+      cursor: pointer; user-select: none;
+      border: 1px solid var(--border2);
+      color: var(--text3); background: var(--surface2);
+      transition: all 0.14s;
+    }
+    .chip:hover { border-color: var(--gold); color: var(--gold); }
+    .chip.on { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+    /* Priority dots */
+    .prio-row { display: flex; gap: 5px; margin-top: 4px; }
+    .pdot {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 600; color: var(--text3);
+      cursor: pointer; user-select: none; transition: all 0.15s;
+    }
+    .pdot:hover { border-color: var(--text2); color: var(--text); }
+    .pdot[data-p="1"].on { background: var(--green-dim); border-color: var(--green); color: var(--green-light); }
+    .pdot[data-p="2"].on { background: rgba(60,110,200,0.15); border-color: #4070c0; color: #7aaae0; }
+    .pdot[data-p="3"].on { background: rgba(190,160,40,0.15); border-color: #b4a020; color: #ddc830; }
+    .pdot[data-p="4"].on { background: rgba(200,120,40,0.15); border-color: #c07020; color: #e09840; }
+    .pdot[data-p="5"].on { background: var(--red-dim); border-color: var(--red); color: #d06060; }
+    .prio-legend { display: flex; justify-content: space-between; margin-top: 3px; }
+    .prio-legend span { font-size: 8.5px; color: var(--text3); }
+
+    /* Confidence meter */
+    .conf-wrap { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .conf-wrap input[type=range] {
+      flex: 1; -webkit-appearance: none;
+      height: 3px; border-radius: 3px;
+      background: var(--surface3); outline: none; border: none;
+    }
+    .conf-wrap input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--gold); cursor: pointer;
+      box-shadow: 0 0 6px rgba(201,168,76,0.4);
+    }
+    .conf-val {
+      font-size: 12px; font-weight: 600; color: var(--gold); min-width: 24px; text-align: right;
+    }
+
+    /* MVP section */
+    .mvp-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+    }
+
+    /* Empty */
+    .empty {
+      max-width: 1120px; margin: 2.5rem auto; padding: 0 2.5rem;
+    }
+    .empty-inner {
+      border: 1px dashed var(--border2);
+      border-radius: var(--radius);
+      padding: 3.5rem 2rem;
+      text-align: center; color: var(--text3); font-size: 13.5px;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: #fff; color: #111; padding: 0; }
+      .hero { background: #fff; }
+      .hero::before, .hero-grid { display: none; }
+      .brand-name { color: #111; }
+      .brand-eyebrow, .sec { color: #888; }
+      .toolbar-right, .btn-del { display: none !important; }
+      .card { background: #fff; border: 1px solid #ccc; break-inside: avoid; }
+      .card-head { background: #f5f5f5; border-bottom-color: #ddd; }
+      .card-accent { background: #c9a84c; }
+      .finput, .ftextarea { background: #fafafa; border-color: #ddd; color: #111; }
+      .chip.on { background: #eee; color: #333; border-color: #999; }
+      .yn-btn.ja { background: #e8f5ee; color: #2d6640; border-color: #2d6640; }
+      .yn-btn.nein { background: #fceaea; color: #8a2020; border-color: #8a2020; }
+      .pdot.on { border-width: 2px; }
+      .meta-input { background: #f5f5f5; border-color: #ddd; color: #111; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .hero-inner { border-bottom-color: #ddd; }
+      .card-num { background: #eee; color: #666; border-color: #ccc; }
+      .mvp-box { background: #f8f8f8; border-color: #ddd; }
+    }
+
+    @media (max-width: 540px) {
+      .grid { grid-template-columns: 1fr; padding: 0 1rem; }
+      .hero { padding: 1.5rem 1rem 0; }
+      .toolbar { padding: 0 1rem; }
+      .row2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="brand">
+      <img class="logo-img" src="data:image/jpeg;base64,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" alt="Freiheit Logo" />
+      <div class="brand-text">
+        <span class="brand-eyebrow">Ideensession</span>
+        <div class="brand-name">Freiheit</div>
+        <span class="brand-sub">Ideen · Analysieren · Entscheiden</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn" onclick="window.print()">Drucken / PDF</button>
+      <button class="btn btn-gold" onclick="addCard()">+ Idee hinzufügen</button>
+    </div>
+  </div>
+  <div class="meta-bar">
+    <span class="meta-label">Datum</span>
+    <input class="meta-input" type="date" id="s-date" />
+    <span class="meta-label" style="margin-left:10px;">Session</span>
+    <input class="meta-input" type="text" id="s-topic" placeholder="Thema / Titel" style="min-width:190px;" />
+    <span class="meta-label" style="margin-left:10px;">Teilnehmer</span>
+    <input class="meta-input" type="text" id="s-members" placeholder="z.B. Ali, Mehmet, Kemal" style="min-width:175px;" />
+  </div>
+  <div style="max-width:1120px;margin:1.5rem auto 0;height:1px;background:var(--border);"></div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <span class="toolbar-label">Ideenblätter</span>
+  <div class="toolbar-right">
+    <button class="btn" onclick="window.print()">Drucken / PDF</button>
+    <button class="btn btn-gold" onclick="addCard()">+ Idee hinzufügen</button>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="grid" id="grid"></div>
+
+<script>
+  let count = 0;
+
+  const CHARS = ['Schnell umsetzbar','Langfristig','Skalierbar','Günstig','Kapitalintensiv','Innovativ','Geringes Risiko','Hohe Wirkung','B2C','B2B','Digital','Physisch'];
+
+  function addCard() {
+    count++;
+    const n = count;
+    const grid = document.getElementById('grid');
+    const empty = grid.querySelector('.empty');
+    if (empty) empty.remove();
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + n;
+
+    card.innerHTML = `
+      <div class="card-accent"></div>
+      <div class="card-head">
+        <div class="card-head-left">
+          <span class="card-num">Idee #${n}</span>
+          <span class="card-person-name" id="badge-${n}"></span>
+        </div>
+        <button class="btn-del" onclick="removeCard(${n})">✕</button>
+      </div>
+
+      <div class="card-body">
+
+        <!-- 1. GRUNDINFO -->
+        <div class="sec">Grundinfo</div>
+
+        <div class="field">
+          <label class="flabel">Person</label>
+          <input class="finput" type="text" placeholder="Wer präsentiert diese Idee?" oninput="setBadge(${n}, this.value)" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Titel der Idee</label>
+          <input class="finput title-f" type="text" placeholder="Name der Idee" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Kategorie</label>
+          <input class="finput" type="text" placeholder="z.B. E-Commerce, Dienstleistung, Produkt, App …" />
+        </div>
+
+        <!-- 2. PROBLEM & LÖSUNG (Lean Canvas) -->
+        <div class="sec">Problem &amp; Lösung</div>
+
+        <div class="field">
+          <label class="flabel">Problem — Was lösen wir?</label>
+          <textarea class="ftextarea" placeholder="Welches konkrete Problem hat die Zielgruppe heute? Wie lösen sie es aktuell?"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Zielgruppe / Kundensegment</label>
+          <input class="finput" type="text" placeholder="Wer leidet am meisten unter diesem Problem?" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Unsere Lösung</label>
+          <textarea class="ftextarea" placeholder="Was genau bieten wir an? Wie funktioniert es?"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Einzigartiger Mehrwert (Unique Value Proposition)</label>
+          <textarea class="ftextarea sm" placeholder="Warum sollen Kunden uns wählen — und nicht die Konkurrenz?"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Unser Vorteil (Unfair Advantage)</label>
+          <textarea class="ftextarea sm" placeholder="Was haben wir, das Wettbewerber nicht einfach kopieren können? (Netzwerk, Wissen, Zugang, Erfahrung …)"></textarea>
+        </div>
+
+        <!-- 3. MARKT & VERTRIEB -->
+        <div class="sec">Markt &amp; Vertrieb</div>
+
+        <div class="field">
+          <label class="flabel">Vertriebskanäle — Wie erreichen wir Kunden?</label>
+          <input class="finput" type="text" placeholder="z.B. Social Media, Empfehlungen, Online-Shop, Messen …" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Konkurrenz / bestehende Alternativen</label>
+          <input class="finput" type="text" placeholder="Wer löst das Problem heute schon — direkt oder indirekt?" />
+        </div>
+
+        <!-- 4. FINANZEN -->
+        <div class="sec">Finanzen</div>
+
+        <div class="row2">
+          <div class="field">
+            <label class="flabel">Startkapital (ca.)</label>
+            <div class="eur-wrap">
+              <span class="eur-sym">€</span>
+              <input class="finput" type="text" placeholder="z.B. 10.000" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="flabel">Laufende Kosten / Monat</label>
+            <div class="eur-wrap">
+              <span class="eur-sym">€</span>
+              <input class="finput" type="text" placeholder="z.B. 800" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Einnahmequellen — Wie verdienen wir Geld?</label>
+          <input class="finput" type="text" placeholder="z.B. Produktverkauf, Abo, Provision, Dienstleistung …" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Break-Even (ca.) — Ab wann läuft es kostendeckend?</label>
+          <input class="finput" type="text" placeholder="z.B. nach 6 Monaten / ab 50 Kunden / ab 5.000 € Umsatz" />
+        </div>
+
+        <!-- 5. RESSOURCEN & INFRASTRUKTUR -->
+        <div class="sec">Ressourcen &amp; Infrastruktur</div>
+
+        <div class="field">
+          <label class="flabel">Zu dritt umsetzbar?</label>
+          <div class="yn" id="yn-team-${n}">
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','team','ja')">Ja</span>
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','team','nein')">Nein, externe Hilfe nötig</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Mitarbeiter notwendig?</label>
+          <div class="yn" id="yn-emp-${n}">
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','emp','ja')">Ja</span>
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','emp','nein')">Nein</span>
+          </div>
+          <input class="finput" type="text" placeholder="Falls ja: Anzahl &amp; Rolle?" style="margin-top:5px;" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Lager notwendig?</label>
+          <div class="yn" id="yn-lager-${n}">
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','lager','ja')">Ja</span>
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','lager','nein')">Nein</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Fahrzeuge notwendig?</label>
+          <div class="yn" id="yn-fahr-${n}">
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','fahr','ja')">Ja</span>
+            <span class="yn-btn" onclick="toggleYN(this,'${n}','fahr','nein')">Nein</span>
+          </div>
+          <input class="finput" type="text" placeholder="Falls ja: Anzahl &amp; Art?" style="margin-top:5px;" />
+        </div>
+
+        <!-- 6. NÄCHSTE SCHRITTE & MVP -->
+        <div class="sec">Umsetzung &amp; MVP</div>
+
+        <div class="mvp-box">
+          <div class="field">
+            <label class="flabel">Minimum Viable Product (MVP) — Kleinste testbare Version</label>
+            <textarea class="ftextarea sm" placeholder="Was ist die einfachste Version, mit der wir die Idee testen können — ohne viel Geld auszugeben?"></textarea>
+          </div>
+          <div class="field" style="margin-top:0.8rem;">
+            <label class="flabel">Erster konkreter Schritt (nächste Woche)</label>
+            <input class="finput" type="text" placeholder="z.B. 10 potenzielle Kunden anrufen / Prototyp skizzieren …" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:0.8rem;">
+          <label class="flabel">Wichtigste Kennzahl zum Messen des Erfolgs (Key Metric)</label>
+          <input class="finput" type="text" placeholder="z.B. Anzahl zahlender Kunden / monatlicher Umsatz / Conversion Rate …" />
+        </div>
+
+        <div class="field">
+          <label class="flabel">Offene Fragen &amp; Annahmen</label>
+          <textarea class="ftextarea sm" placeholder="Was nehmen wir noch an? Was müssen wir validieren?"></textarea>
+        </div>
+
+        <!-- 7. EINSCHÄTZUNG -->
+        <div class="sec">Einschätzung</div>
+
+        <div class="field">
+          <label class="flabel">Eigenschaften</label>
+          <div class="chips">
+            ${CHARS.map(t => `<span class="chip" onclick="this.classList.toggle('on')">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Priorität für uns</label>
+          <div class="prio-row" id="prio-${n}">
+            ${[1,2,3,4,5].map(i => `<span class="pdot" data-p="${i}" onclick="setPrio(${n},${i})">${i}</span>`).join('')}
+          </div>
+          <div class="prio-legend"><span>Niedrig</span><span>Sehr hoch</span></div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Vertrauen in die Idee (1 = unsicher · 5 = sehr zuversichtlich)</label>
+          <div class="conf-wrap">
+            <input type="range" min="1" max="5" value="3" step="1" oninput="this.nextElementSibling.textContent=this.value" />
+            <span class="conf-val">3</span>
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+  }
+
+  function removeCard(n) {
+    const c = document.getElementById('card-' + n);
+    if (c) c.remove();
+    if (!document.querySelector('.card')) showEmpty();
+  }
+
+  function showEmpty() {
+    const grid = document.getElementById('grid');
+    const div = document.createElement('div');
+    div.className = 'empty';
+    div.innerHTML = '<div class="empty-inner">Noch keine Ideen — klick auf "+ Idee hinzufügen".</div>';
+    grid.appendChild(div);
+  }
+
+  function setBadge(n, val) {
+    const b = document.getElementById('badge-' + n);
+    if (b) b.textContent = val ? '— ' + val : '';
+  }
+
+  function toggleYN(el, n, group, state) {
+    const row = el.closest('.yn');
+    row.querySelectorAll('.yn-btn').forEach(b => { b.classList.remove('ja'); b.classList.remove('nein'); });
+    el.classList.add(state);
+  }
+
+  function setPrio(n, p) {
+    document.getElementById('prio-' + n).querySelectorAll('.pdot').forEach(d => {
+      d.classList.toggle('on', parseInt(d.dataset.p) === p);
+    });
+  }
+
+  // Init
+  document.getElementById('s-date').value = new Date().toISOString().split('T')[0];
+  addCard();
+  addCard();
+</script>
+</body>
+</html>
